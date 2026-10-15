@@ -28,5 +28,5 @@ int main()
         curX += width;
     }
 
-    std::cout << Math::sin(3) << std::endl;
+    std::cout << Math::sin(3.1415 / 6) / Math::cos(3.1415 / 6) << std::endl;
 }

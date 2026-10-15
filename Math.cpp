@@ -35,17 +35,18 @@ double Math::sin(double x)
 {
     const double PI = 3.14159265358979323846;
     const double TWO_PI = PI * 2.0;
-    const int ACCURACY = 17;
+    const double EPSILON = 1e-6;
 
     x = mod(x, TWO_PI);
-    double result = 0;
-    double term;
+    double term = x;
+    double result = x;
+    double xSquared = x * x;
 
-    for (int n = 0; n < ACCURACY; n++)
+    for (int n = 1; abs(term) > EPSILON; n++)
     {
-        term = (power(-1, n) * power(x, 2 * n + 1)) / factorial(2 * n + 1);
-        std::cout << term << std::endl;
+        term *= -xSquared / (n * 2 * (n * 2 + 1));
         result += term;
+        std::cout << term << '\t' << result << std::endl;
     }
 
     return result;
@@ -53,6 +54,23 @@ double Math::sin(double x)
 
 double Math::cos(double x)
 {
+    const double PI = 3.14159265358979323846;
+    const double TWO_PI = PI * 2.0;
+    const double EPSILON = 1e-10;
+
+    x = mod(x, TWO_PI);
+    double term = 1;
+    double result = 1;
+    double xSquared = x * x;
+
+    for (int n = 1; abs(term) > EPSILON; n++)
+    {
+        term *= -xSquared / (n * 2 * (n * 2 - 1));
+        result += term;
+        std::cout << term << '\t' << result << std::endl;
+    }
+
+    return result;
 }
 
 double Math::mod(double x, double y)
